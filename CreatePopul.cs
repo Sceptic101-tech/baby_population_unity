@@ -1,0 +1,21 @@
+using JetBrains.Annotations;
+using UnityEngine;
+
+public class CreatePopul : MonoBehaviour
+{
+    public GameObject predator;
+    public GameObject prey;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        GameObject AgentObject;
+        for (int i = 0; i < 10; i++)
+        {
+            AgentObject = Instantiate(predator, transform.position - new Vector3(-1, 0, 5 - i), Quaternion.identity);
+        }
+        for (int i = 0; i < 40; i++)
+        {
+            AgentObject = Instantiate(prey, transform.position + new Vector3(15, 0, -15 + i), Quaternion.identity);
+        }
+    }
+}
