@@ -56,7 +56,7 @@ public class NeuralNetwork : MonoBehaviour
             for(int j = 0; j < layers[i].Length; j++)
             {
                 layers[i][j] = 0;
-                biases[i][j] = Random.Range(-0.0002f, 0.0002f);
+                biases[i][j] = Random.Range(-0.00002f, 0.00002f);
             }
         }
     }
@@ -116,7 +116,7 @@ public class NeuralNetwork : MonoBehaviour
                     if (float.IsNaN(new_weights[n][i, j])) 
                         new_weights[n][i, j] = 0.0f;
                     if (mutation_chance_percantage <= Random.Range(0, 101))
-                        new_weights[n][i, j] += Random.Range(-0.001f, 0.001f);
+                        new_weights[n][i, j] += Random.Range(-0.005f, 0.005f);
                 }
             }
         }

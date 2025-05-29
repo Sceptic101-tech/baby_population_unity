@@ -9,6 +9,7 @@ public class Prey : MonoBehaviour
     public float time_of_life;
     public float timer_of_life;
     public float vision_range;
+    public float turning_side_mult;
     public float field_of_view;
     public int count_of_rays;
     public int count_of_outputs;
@@ -121,13 +122,15 @@ public class Prey : MonoBehaviour
         net.ForwardPropagation(layers, weights, biases);
         outputs[0] = layers[layers.Length - 1][0];//Поворот
         outputs[1] = layers[layers.Length - 1][1];//Поворот
-        outputs[2] = Mathf.Abs(layers[layers.Length - 1][2]);//Моментальное ускорение
+        outputs[2] = layers[layers.Length - 1][2];//Моментальное ускорение
+        outputs[2] = Mathf.Clamp(outputs[2], -2f, 2f);
 
-        turning_side = 2*(outputs[0] + outputs[1]);
+        turning_side = turning_side_mult*(outputs[0] + outputs[1]);
 
         turning_side = Mathf.Clamp(turning_side, -45f, 45f);
         transform.Rotate(0, turning_side, 0);
         Vector3 movement = transform.forward * (speed + outputs[2]) * Time.deltaTime;
+        //Vector3 movement = transform.forward * speed * Time.deltaTime;
         rb.MovePosition(rb.position + movement);
 
         turning_side = 0;
@@ -164,6 +167,16 @@ public class Prey : MonoBehaviour
         offspring.CopyNetwork(this);
         offspring.net.Mutate(offspring.weights, offspring.count_of_hidden_layers, 
                         offspring.biases, mutation_chance_percantage);
+
+        //mutating agents params
+        if(mutation_chance_percantage <= Random.Range(0, 101))
+        {
+            //speed += Random.Range(-1.0f, 1.0f);
+            vision_range += Random.Range(-1.0f, 1.0f);
+            //field_of_view += Random.Range(-5, 5);
+            //turning_side_mult += Random.Range(-1.0f, 1.0f);
+            //time_to_reproduce += Random.Range(-0.5f, 0.5f);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

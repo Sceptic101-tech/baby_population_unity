@@ -9,13 +9,13 @@ public class CreatePopul : MonoBehaviour
     void Start()
     {
         GameObject AgentObject;
-        for (int i = 0; i < 25; i++)
+        for (int i = 0; i < 10; i++)
         {
             AgentObject = Instantiate(predator, transform.position - new Vector3(-1, 0, 30 - i), Quaternion.identity);
         }
-        for (int i = 0; i < 60; i++)
+        for (int i = 0; i < 40; i++)
         {
-            AgentObject = Instantiate(prey, transform.position + new Vector3(15, 0, -30 + i), Quaternion.identity);
+            AgentObject = Instantiate(prey, transform.position + new Vector3(15, 0, -40 + i), Quaternion.identity);
         }
     }
 }
