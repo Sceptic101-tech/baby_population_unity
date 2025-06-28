@@ -1,11 +1,4 @@
-using NUnit.Framework.Constraints;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.Rendering;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 public class NeuralNetwork : MonoBehaviour
 {
@@ -64,22 +57,22 @@ public class NeuralNetwork : MonoBehaviour
     public void ForwardPropagation(float[][] layers, float[][,] new_weights, float[][] biases)
     {
         MakeNeuronsZero(layers);
-        for(int i = 1; i < layers.Length; i++)
+        for (int i = 1; i < layers.Length; i++)
         {
-            for(int j = 0; j < layers[i].Length; j++)
+            for (int j = 0; j < layers[i].Length; j++)
             {
                 for (int k = 0; k < new_weights[i - 1].GetLength(0); k++)
                 {
-                    layers[i][j] += new_weights[i - 1][k, j] * layers[i-1][k];
+                    layers[i][j] += new_weights[i - 1][k, j] * layers[i - 1][k];
                 }
-                layers[i][j] += biases[i][j];
+                //layers[i][j] += biases[i][j]; //Использование смещения
             }
-            if(i < layers.Length-1)
+            if (i < layers.Length - 1)                
                 tanh(layers, i);
-            // if(i == layers.Length-1)
-            //     tanh(layers, i);
-            // else
-            //     sigmoid(layers, i);
+                // if(i == layers.Length-1)
+                //     tanh(layers, i);
+                // else
+                //     sigmoid(layers, i);
         }
     }
     public void MakeNeuronsZero(float[][] layers)
@@ -116,7 +109,7 @@ public class NeuralNetwork : MonoBehaviour
                     if (float.IsNaN(new_weights[n][i, j])) 
                         new_weights[n][i, j] = 0.0f;
                     if (mutation_chance_percantage <= Random.Range(0, 101))
-                        new_weights[n][i, j] += Random.Range(-0.005f, 0.005f);
+                        new_weights[n][i, j] += Random.Range(-0.01f, 0.01f);
                 }
             }
         }

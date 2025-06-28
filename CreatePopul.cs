@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class CreatePopul : MonoBehaviour
@@ -9,13 +8,13 @@ public class CreatePopul : MonoBehaviour
     void Start()
     {
         GameObject AgentObject;
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 15; i++)
         {
-            AgentObject = Instantiate(predator, transform.position - new Vector3(-1, 0, 30 - i), Quaternion.identity);
+            AgentObject = Instantiate(predator, transform.position - new Vector3(20, 0, 30 - i), Quaternion.identity);
         }
-        for (int i = 0; i < 40; i++)
+        for (int i = 0; i < 45; i++)
         {
-            AgentObject = Instantiate(prey, transform.position + new Vector3(15, 0, -40 + i), Quaternion.identity);
+            AgentObject = Instantiate(prey, transform.position + new Vector3(20, 0, -40 + i), Quaternion.identity);
         }
     }
 }

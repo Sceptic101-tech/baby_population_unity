@@ -1,29 +1,29 @@
-using System.Threading;
 using UnityEngine;
 
 public class Prey : MonoBehaviour
 {
-    public bool is_predator;
+    [Header("Сhangeable")]
     public float speed;
-    public float timer;
+    public int mutation_chance_percantage;
+    public float time_to_reproduce;
     public float time_of_life;
-    public float timer_of_life;
     public float vision_range;
     public float turning_side_mult;
     public float field_of_view;
     public int count_of_rays;
-    public int count_of_outputs;
     public int count_of_hidden_layers;
     public int hidden_layer_size;
+    
+    [Header("Not changeable")]
+    public int count_of_outputs;
+    private float timer;
+    public bool is_predator;
     public float[] inputs;
     public float[] outputs;
     public float[][] layers;
     public float[][] biases;
     public float[][,] weights;
-    public float turning_side;
-    public int mutation_chance_percantage;
-
-    public float time_to_reproduce;
+    private float turning_side;
 
     public Vision vision;
     public NeuralNetwork net;
